@@ -1,3 +1,7 @@
-Concerne le TP ZeroClassGenerator sur le site OpenClassRoom
+Qt project
 
-Cours C++ / Qt
+Fichier "Ruby.png" a mettre dans le dossier build
+
+Concerne le TP ZeroClassGenerator sur le site OpenClassRoom Cours C++ 
+
+

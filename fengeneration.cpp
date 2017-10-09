@@ -2,7 +2,7 @@
 
 FenGeneration::FenGeneration(QString streamOut): QDialog()
 {
-    //setWindowIcon(QIcon("Ruby.png"));
+    setWindowIcon(QIcon("Ruby.png"));
     setWindowTitle(".h");
     int tailleFont(8);
     QFont police("Courier",tailleFont,QFont::Bold);
@@ -16,18 +16,17 @@ FenGeneration::FenGeneration(QString streamOut): QDialog()
     QFontMetrics fm(police);
     QSize taille=fm.size(0,m_streamIn->toPlainText());
 
-    int largeur=taille.width();
-    int hauteur=taille.height();
+    int largeur=taille.width()+15;
+    int hauteur=taille.height()+15;
 
-    if(largeur>600 && hauteur>800)
-        {m_streamIn->setMinimumSize(600,800);}
-    if(largeur>600 && hauteur<800)
-        {m_streamIn->setMinimumSize(600,hauteur+10);}
-    if(largeur<600 && hauteur<800)
-        {m_streamIn->setMinimumSize(largeur+10,hauteur+10);}
-    if(largeur<600 && hauteur>800)
-        {m_streamIn->setMinimumSize(largeur+10,800);}
+    if(largeur>600)
+    {m_streamIn->setMinimumWidth(600);}
+    else {m_streamIn->setMinimumWidth(largeur);}
+    if(hauteur>800)
+    {m_streamIn->setMinimumHeight(800);}
+    else {m_streamIn->setMinimumHeight(hauteur);}
     m_streamIn->setMaximumSize(600,800);
+
 
     QPushButton *btn1= new QPushButton("Quitter");
     QHBoxLayout *layout1 = new QHBoxLayout;
@@ -42,5 +41,4 @@ FenGeneration::FenGeneration(QString streamOut): QDialog()
 
 
     connect(btn1, SIGNAL(clicked()), this, SLOT(close()));
-
 }

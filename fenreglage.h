@@ -16,18 +16,24 @@
 #include <QStringList>
 
 
+
 class FenReglage:public QWidget
 {
-    Q_OBJECT        //utilisation de slot personnalisé
+    Q_OBJECT        //utilisation de slot perso
 
     public:
     FenReglage();
 
     public slots:
-    void genererFichier();
+    void genererFichiers();
+    QString creationH();
+    QString creationCpp();
+    void majHeader(const QString nomClasse);
+    void majNom(const QString nomHeader);
 
     private:
     QLineEdit *m_nom;
+    QLineEdit *m_nomHeader;
     QLineEdit *m_nomMere;
 
     QCheckBox *m_constructeur;

@@ -1,44 +1,62 @@
 #include "FenGeneration.h"
 
-FenGeneration::FenGeneration(QString streamOut): QDialog()
+FenGeneration::FenGeneration(QString h, QString cpp): QDialog()
 {
     setWindowIcon(QIcon("Ruby.png"));
-    setWindowTitle(".h");
-    int tailleFont(8);
-    QFont police("Courier",tailleFont,QFont::Bold);
-    m_streamIn= new QTextEdit;
-    m_streamIn->setPlainText(streamOut);
-    m_streamIn->setFont(police);
-    m_streamIn->setReadOnly(true);
+    setWindowTitle("Génération des fichiers");
+    m_font= new QFont("Courier",8);
+    m_fm= new QFontMetrics(*m_font);
+    m_onglets= new QTabWidget;
 
-
-
-    QFontMetrics fm(police);
-    QSize taille=fm.size(0,m_streamIn->toPlainText());
-
-    int largeur=taille.width()+15;
-    int hauteur=taille.height()+15;
-
-    if(largeur>600)
-    {m_streamIn->setMinimumWidth(600);}
-    else {m_streamIn->setMinimumWidth(largeur);}
-    if(hauteur>800)
-    {m_streamIn->setMinimumHeight(800);}
-    else {m_streamIn->setMinimumHeight(hauteur);}
-    m_streamIn->setMaximumSize(600,800);
-
-
+    QPushButton *btn0= new QPushButton("Enregistrer");
     QPushButton *btn1= new QPushButton("Quitter");
+
     QHBoxLayout *layout1 = new QHBoxLayout;
+    layout1->addWidget(btn0);
     layout1->addWidget(btn1);
     layout1->setAlignment(Qt::AlignRight);
 
-    QVBoxLayout *layout0= new QVBoxLayout;
-    layout0->addWidget(m_streamIn);
+    QVBoxLayout *layout0=new QVBoxLayout;
+    layout0->addWidget(m_onglets);
     layout0->addLayout(layout1);
-    layout0->setSizeConstraint(QLayout::SetMinAndMaxSize);
-    this->setLayout(layout0);
+    setLayout(layout0);
 
+    creationOnglet(m_textH,h,".h");
+    creationOnglet(m_textCpp,cpp,".cpp");
 
+    connect(btn0, SIGNAL(clicked()), this, SLOT(saveFiles()));
     connect(btn1, SIGNAL(clicked()), this, SLOT(close()));
 }
+
+    void FenGeneration::creationOnglet(QTextEdit *a, QString b, QString c)
+    {
+     a= new QTextEdit;
+     a->setPlainText(b);
+     a->setFont(*m_font);
+     a->setReadOnly(true);
+
+     QSize *taille=new QSize(m_fm->size(0,a->toPlainText()));
+
+     int *largeur=new int(taille->width()+15);
+     int *hauteur=new int(taille->height()+15);
+
+     if(*largeur>600)
+     {a->setMinimumWidth(600);}
+     else {a->setMinimumWidth(*largeur);}
+     if(*hauteur>800)
+     {a->setMinimumHeight(800);}
+     else {a->setMinimumHeight(*hauteur);}
+     a->setMaximumSize(600,800);
+
+     QVBoxLayout *layout0= new QVBoxLayout;
+     layout0->addWidget(a);
+     layout0->setSizeConstraint(QLayout::SetMinAndMaxSize);
+
+     QLabel *page=new QLabel;
+     page->setLayout(layout0);
+     m_onglets->addTab(page,c);
+     }
+
+    void FenGeneration::saveFiles()
+    {
+    }

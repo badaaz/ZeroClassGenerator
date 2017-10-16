@@ -23,11 +23,13 @@ class FenReglage:public QWidget
 
     public:
     FenReglage();
+    QString creationH();
+    QString creationCpp();
+    QString getNom(); //accesseur
+
 
     public slots:
     void genererFichiers();
-    QString creationH();
-    QString creationCpp();
     void majHeader(const QString nomClasse);
     void majNom(const QString nomHeader);
 

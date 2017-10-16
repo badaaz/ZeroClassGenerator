@@ -144,3 +144,8 @@ FenReglage::FenReglage():QWidget()
         stream->append("\n");
         return *stream;
    }
+
+    QString FenReglage::getNom()
+    {
+       return m_nom->text();
+    }

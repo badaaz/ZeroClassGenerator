@@ -1,4 +1,5 @@
 #include "FenGeneration.h"
+#include "FenReglage.h"
 
 FenGeneration::FenGeneration(QString h, QString cpp): QDialog()
 {
@@ -59,4 +60,10 @@ FenGeneration::FenGeneration(QString h, QString cpp): QDialog()
 
     void FenGeneration::saveFiles()
     {
+        QFile *fileH=new QFile(".h");
+        if (!fileH->open(QIODevice::WriteOnly | QIODevice::Text))
+        {return;}
+
+        QTextStream *streamH=new QTextStream(fileH);
+        *streamH<<(m_textH->toPlainText());
     }

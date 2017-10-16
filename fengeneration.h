@@ -9,6 +9,8 @@
 #include <QMessageBox>
 #include <QTableWidget>
 #include <QLabel>
+#include <QFile>
+#include <QTextStream>
 
 
 class FenGeneration : public QDialog

@@ -3,7 +3,7 @@
 
 #include <QApplication>
 #include <QDialog>
-#include <QTextEdit>
+#include <QPlainTextEdit>
 #include <QBoxLayout>
 #include <QPushButton>
 #include <QMessageBox>
@@ -19,14 +19,14 @@ class FenGeneration : public QDialog
 
     public:
     FenGeneration(QString h,QString cpp);
-    void creationOnglet(QTextEdit *widget, QString contenu, QString nom);
+    void creationOnglet(QPlainTextEdit *widget, QString contenu, QString nom);
 
     public slots:
     void saveFiles();
 
     private:
-    QTextEdit *m_textH;
-    QTextEdit *m_textCpp;
+    QPlainTextEdit *m_textH;
+    QPlainTextEdit *m_textCpp;
     QFontMetrics *m_fm;
     QFont *m_font;
     QTabWidget *m_onglets;

@@ -29,9 +29,9 @@ FenGeneration::FenGeneration(QString h, QString cpp): QDialog()
     connect(btn1, SIGNAL(clicked()), this, SLOT(close()));
 }
 
-    void FenGeneration::creationOnglet(QTextEdit *a, QString b, QString c)
+    void FenGeneration::creationOnglet(QPlainTextEdit *a, QString b, QString c)
     {
-     a= new QTextEdit;
+     a= new QPlainTextEdit;
      a->setPlainText(b);
      a->setFont(*m_font);
      a->setReadOnly(true);
@@ -61,9 +61,14 @@ FenGeneration::FenGeneration(QString h, QString cpp): QDialog()
     void FenGeneration::saveFiles()
     {
         QFile *fileH=new QFile(".h");
-        if (!fileH->open(QIODevice::WriteOnly | QIODevice::Text))
+        /*if (!fileH->open(QIODevice::WriteOnly | QIODevice::Text))
         {return;}
 
         QTextStream *streamH=new QTextStream(fileH);
-        *streamH<<(m_textH->toPlainText());
+        *streamH<<(m_textH->toPlainText());*/
+
+        fileH->open(QIODevice::WriteOnly | QIODevice::Text);
+        fileH->write((m_textH->toPlainText()).toLatin1());
+        fileH->close();
+
     }
